@@ -4,7 +4,6 @@ This repository documents my learning journey through the **Cyfrin Updraft Solid
 
 ## 📌 What This Repo Contains
 - Solidity practice contracts
-- Course notes & explanations (in my own words)
 - Mini-projects and exercises
 - Security concepts and best practices
 - Testing & deployment experiments
