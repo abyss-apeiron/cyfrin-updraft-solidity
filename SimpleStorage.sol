@@ -27,6 +27,8 @@ contract SimpleStorage {
     // view reads state from the blockchain but doesn't modify the state
     // pure does not read nor update the state of the blockchain
 
+    // calldata & memory refer to a temporary storage but while memory variables are modifiable, calldata variables are not modifiable
+    // storage refers to permanent storage that can be modified. state variables are of this type
     function addPerson(string memory _name, uint256 _favouriteNumber) public {
         listOfPeople.push(Person(_favouriteNumber, _name));
     }
