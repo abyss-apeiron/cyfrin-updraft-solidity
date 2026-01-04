@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.18; // this is the solidity version
+pragma solidity ^0.8.18; // this is the solidity version
 
 contract SimpleStorage {
     // Basic Types: boolean, uint, int, address, bytes
@@ -14,6 +14,8 @@ contract SimpleStorage {
 
     // dynamic array due to the [] having nothing inside meaning it can have any size
     Person[] public listOfPeople;
+
+    mapping(string => uint256) public nameToFavouriteNumber;
 
 
     function store(uint256 _favouriteNumber) public {
@@ -31,5 +33,6 @@ contract SimpleStorage {
     // storage refers to permanent storage that can be modified. state variables are of this type
     function addPerson(string memory _name, uint256 _favouriteNumber) public {
         listOfPeople.push(Person(_favouriteNumber, _name));
+        nameToFavouriteNumber[_name] = _favouriteNumber;
     }
 }
