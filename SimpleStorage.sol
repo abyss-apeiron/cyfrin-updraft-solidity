@@ -36,3 +36,7 @@ contract SimpleStorage {
         nameToFavouriteNumber[_name] = _favouriteNumber;
     }
 }
+
+contract SimpleStorage2 {}
+contract SimpleStorage3 {}
+contract SimpleStorage4 {}
