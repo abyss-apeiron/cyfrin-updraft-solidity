@@ -11,18 +11,21 @@ import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interf
 contract FundMe {
 
     uint256 public minimumUsd = 5e18;
+
+    address[] public funders;
+    mapping(address funder => uint256 amountFunded) public addressToAmountFunded;
     
     function fund() public payable {
         // Allow users to send $
         // Have a minimum $ sent $5
         require(getConversionRate(msg.value) >= minimumUsd, "You need to spend more ETH!"); // 1 Eth = 1 * 10 ** 18 Wei
-
+        funders.push(msg.sender);
+        addressToAmountFunded[msg.sender] += msg.value;
+    }
 
         // What is a revert?
         // Undo any actions that have been done, and send the remaining gas back
 
-
-    }
 
     // function withdraw() public {}
 
@@ -42,7 +45,7 @@ contract FundMe {
     }
 
     function getVersion() public view returns (uint256) {
-
+        return AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306).version();
     }
 
 }
