@@ -30,6 +30,13 @@ contract FundMe {
         // Undo any actions that have been done, and send the remaining gas back
 
 
-    // function withdraw() public {}
+    function withdraw() public {
+        // for loop
+        /* for takes the following parameters: starting index, ending index(bool), step amount */
+        for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
+            address funder = funders[funderIndex];
+            addressToAmountFunded[funder] = 0;
+        }
+    }
 
 }
