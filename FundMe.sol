@@ -16,6 +16,12 @@ contract FundMe {
 
     address[] public funders;
     mapping(address funder => uint256 amountFunded) public addressToAmountFunded;
+
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
     
     function fund() public payable {
         msg.value.getConversionRate();
@@ -31,6 +37,8 @@ contract FundMe {
 
 
     function withdraw() public {
+        require(msg.sender == owner, "Must be owner!");
+
         // for loop
         /* for takes the following parameters: starting index, ending index(bool), step amount */
         for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
@@ -41,7 +49,17 @@ contract FundMe {
         funders = new address[](0);
 
         // withdraw the funds
-        
+
+        //transfer
+        //payable(msg.sender).transfer(address(this).balance); 
+        //send
+        //bool sendSuccess = payable(msg.sender).send(address(this).balance);
+        //require(sendSuccess, "Send failed");
+
+        //call
+        (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
+        require(callSuccess, "Call failed");
+
     }
 
 }
