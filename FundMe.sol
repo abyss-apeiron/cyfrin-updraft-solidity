@@ -36,9 +36,7 @@ contract FundMe {
         // Undo any actions that have been done, and send the remaining gas back
 
 
-    function withdraw() public {
-        require(msg.sender == owner, "Must be owner!");
-
+    function withdraw() public onlyOwner {
         // for loop
         /* for takes the following parameters: starting index, ending index(bool), step amount */
         for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
@@ -60,6 +58,11 @@ contract FundMe {
         (bool callSuccess,) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed");
 
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Sender is not owner!");
+        _;
     }
 
 }
